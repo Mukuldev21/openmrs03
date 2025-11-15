@@ -5,7 +5,7 @@ import { HomePage } from '../pages/HomePage';
 import { LoginDetails } from '../fixtures/Logindetails';
 
 
-test.describe('User Authentication', () => {
+test.describe('1. User Authentication', () => {
   test('TC-01: Login with valid credentials', async ({ page }, testInfo) => {
     // Allure metadata removed
 
