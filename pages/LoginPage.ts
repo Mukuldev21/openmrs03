@@ -19,6 +19,10 @@ export class LoginPage extends BasePage {
         this.errorNotificationSubtitle = page.locator('div.cds--inline-notification__subtitle'); // Added locator
     }
 
+    async waitForLoginPageLoad(): Promise<void> {
+        await this.page.waitForLoadState('domcontentloaded');
+    }
+
     async login(username: string, password: string): Promise<void> {
         await this.fillInput(this.usernameInput, username);
         await this.clickElement(this.continueButton);

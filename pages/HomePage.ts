@@ -9,6 +9,7 @@ export class HomePage extends BasePage {
     readonly userMenuChangeLanguage: Locator;
     readonly userMenuChangePassword: Locator;
     readonly userMenuLogout: Locator;
+    readonly resgisterPatientButton: Locator;   
 
     // Service Queues navigation and page locators (updated to match provided DOM)
     readonly serviceQueuesNav: Locator;
@@ -28,6 +29,9 @@ export class HomePage extends BasePage {
         'Actions'
     ];
 
+    //for language change
+    readonly myAccountMenu: Locator;
+
     constructor(page: Page) {
         super(page);
         // Updated locator for the OpenMRS Logo header
@@ -40,6 +44,7 @@ export class HomePage extends BasePage {
         this.userMenuChangeLanguage = page.locator('a[aria-label="Change language"]');
         this.userMenuChangePassword = page.locator('a[aria-label="Change password"]');
         this.userMenuLogout = page.locator('button:has-text("Logout")');
+        this.resgisterPatientButton = page.getByRole('button', { name: 'Add patient' });
 
         // Service Queues navigation locator
         this.serviceQueuesNav = page.locator('p:has-text("Service queues")');
@@ -52,8 +57,15 @@ export class HomePage extends BasePage {
         this.filterDropdownLabel = page.locator('label.cds--label', { hasText: 'Show patients with status:' });
         this.filterTableLabel = page.locator('label.cds--label', { hasText: 'Filter table' });
         this.clearQueueButton = page.locator('button.cds--btn.cds--btn--lg.cds--layout--size-lg.cds--btn--ghost', { hasText: 'Clear queue' });
+
+        // Language change menu
+        this.myAccountMenu = page.locator('.svg.omrs-icon kkUJqagTWOXdl47D96eILQ==');
+
     }
 
+    async waitForHomePageLoad(): Promise<void> {
+        await this.page.waitForLoadState('domcontentloaded');
+    }
 
     async waitForServiceQueuesSection(): Promise<void> {
         await this.serviceQueuesSection.waitFor({ state: 'visible', timeout: 10000 });
@@ -87,5 +99,21 @@ export class HomePage extends BasePage {
 
     async isUserMenuVisible(): Promise<boolean> {
         return this.userMenu.isVisible();
+    }
+
+    async clickRegisterPatientButton(): Promise<void> {
+        await this.resgisterPatientButton.click();
+    }
+
+    async isRegisterPatientButtonVisible(): Promise<boolean> {
+        return this.resgisterPatientButton.isVisible();
+    }
+
+    async isMyAccountMenuVisible(): Promise<boolean> {
+        return this.myAccountMenu.isVisible();
+    }
+
+    async clickMyAccountMenu(): Promise<void> {
+        await this.myAccountMenu.click();
     }
 }
