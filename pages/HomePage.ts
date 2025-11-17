@@ -31,6 +31,8 @@ export class HomePage extends BasePage {
 
     //for language change
     readonly myAccountMenu: Locator;
+    readonly changeLanguageOption: Locator;
+    readonly englishLanguageOption: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -59,7 +61,13 @@ export class HomePage extends BasePage {
         this.clearQueueButton = page.locator('button.cds--btn.cds--btn--lg.cds--layout--size-lg.cds--btn--ghost', { hasText: 'Clear queue' });
 
         // Language change menu
-        this.myAccountMenu = page.locator('.svg.omrs-icon kkUJqagTWOXdl47D96eILQ==');
+        this.myAccountMenu = page.getByRole('button', { name: 'My Account' });
+        this.changeLanguageOption = page.getByLabel('Change language').getByRole('button', { name: 'Change' });
+        this.englishLanguageOption = page.getByRole('button', { name: 'English' });
+        
+
+
+    
 
     }
 
