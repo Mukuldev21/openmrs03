@@ -72,7 +72,7 @@ export class HomePage extends BasePage {
     }
 
     async waitForHomePageLoad(): Promise<void> {
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForLoadState('load');
     }
 
     async waitForServiceQueuesSection(): Promise<void> {

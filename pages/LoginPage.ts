@@ -20,7 +20,7 @@ export class LoginPage extends BasePage {
     }
 
     async waitForLoginPageLoad(): Promise<void> {
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForLoadState('load');
     }
 
     async login(username: string, password: string): Promise<void> {

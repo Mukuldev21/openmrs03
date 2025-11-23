@@ -170,7 +170,7 @@ export class RegisterPatientPage extends BasePage {
     }
 
     async waitForRegisterPatientPageLoad(): Promise<void> {
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForLoadState('load');
     }
 
     async isNewPatientHeaderVisible(): Promise<boolean> {
