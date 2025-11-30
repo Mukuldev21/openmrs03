@@ -16,16 +16,16 @@ test.describe('3. Register Patient Functionality', () => {
         console.log('[TC-08] Navigating to login page');
         await loginPage.navigateToHomePage();
         await loginPage.waitForLoginPageLoad();
-        
+
         console.log('[TC-08] Logging in as valid user');
         await loginPage.login(LoginDetails.validUser.username, LoginDetails.validUser.password);
         await homePage.waitForElement(homePage.homePageHeader);
         await homePage.waitForHomePageLoad();
-        
+
 
         // Locate and click the 'Register Patient' button
         console.log('[TC-08] Locate Register Patient button');
-        await homePage.isRegisterPatientButtonVisible ();
+        await homePage.isRegisterPatientButtonVisible();
         console.log('[TC-08] Clicking Register Patient button');
         await homePage.clickRegisterPatientButton();
 
@@ -46,7 +46,7 @@ test.describe('3. Register Patient Functionality', () => {
         await expect(registerPatientPage.dateOfBirthInput).toBeVisible();
         await expect(registerPatientPage.sex).toBeVisible();
         await expect(registerPatientPage.registerButton).toBeVisible();
-    
+
         console.log('[TC-08] Register Patient page loaded correctly with all key elements visible');
 
 

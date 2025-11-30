@@ -19,8 +19,8 @@ export class RegisterPatientPage extends BasePage {
     readonly sex: Locator;
     readonly maleGenderButton: Locator;
     readonly femaleGenderButton: Locator;
-    readonly otherGenderButton : Locator;
-    readonly unknownGenderButton : Locator;
+    readonly otherGenderButton: Locator;
+    readonly unknownGenderButton: Locator;
     //readonly identifierTypeSelect: Locator;
     readonly countryInput: Locator;
 
@@ -47,10 +47,10 @@ export class RegisterPatientPage extends BasePage {
         this.unknownPatientCheckbox = page.locator('input[type="checkbox"][name="unknown"]');
         this.advancedSearchLink = page.locator('a:has-text("Advanced Search")');
         this.sex = page.getByRole('heading', { name: 'Sex' });
-        this.maleGenderButton = page.getByLabel('Male');
-        this.femaleGenderButton = page.getByLabel('Female');
-        this.otherGenderButton = page.getByLabel('Other');
-        this.unknownGenderButton = page.getByLabel('Unknown');
+        this.maleGenderButton = page.getByRole('radio', { name: 'Male', exact: true });
+        this.femaleGenderButton = page.getByRole('radio', { name: 'Female', exact: true });
+        this.otherGenderButton = page.getByRole('radio', { name: 'Other', exact: true });
+        this.unknownGenderButton = page.getByRole('radio', { name: 'Unknown', exact: true });
         //this.identifierTypeSelect = page.locator('select[name="identifierType"]');
         this.countryInput = page.getByRole('textbox', { name: 'Country' });
 
@@ -62,31 +62,31 @@ export class RegisterPatientPage extends BasePage {
     }
 
     async enterGivenName(text: string): Promise<void> {
-        await this.givenNameInput.fill(text);
+        await this.givenNameInput.fill(text, { force: true });
     }
 
     async enterMiddleName(text: string): Promise<void> {
-        await this.middleNameInput.fill(text);
+        await this.middleNameInput.fill(text, { force: true });
     }
 
     async enterFamilyName(text: string): Promise<void> {
-        await this.familyNameInput.fill(text);
+        await this.familyNameInput.fill(text, { force: true });
     }
 
     async enterDateOfBirth(date: string): Promise<void> {
-        await this.dateOfBirthInput.fill(date);
+        await this.dateOfBirthInput.fill(date, { force: true });
     }
 
     async enterPhoneNumber(phone: string): Promise<void> {
-        await this.phoneNumberInput.fill(phone);
+        await this.phoneNumberInput.fill(phone, { force: true });
     }
 
     async enterEmail(email: string): Promise<void> {
-        await this.emailInput.fill(email);
+        await this.emailInput.fill(email, { force: true });
     }
 
     async enterAddress(address: string): Promise<void> {
-        await this.addressInput.fill(address);
+        await this.addressInput.fill(address, { force: true });
     }
 
     async clickRegisterButton(): Promise<void> {
@@ -124,13 +124,13 @@ export class RegisterPatientPage extends BasePage {
                 break;
             case 'female':
                 await this.femaleGenderButton.click();
-                break;  
+                break;
             case 'other':
                 await this.otherGenderButton.click();
                 break;
             case 'unknown':
                 await this.unknownGenderButton.click();
-                break;    
+                break;
             default:
                 throw new Error(`Invalid gender option: ${gender}`);
         }
@@ -171,6 +171,7 @@ export class RegisterPatientPage extends BasePage {
 
     async waitForRegisterPatientPageLoad(): Promise<void> {
         await this.page.waitForLoadState('load');
+        await this.givenNameInput.waitFor({ state: 'visible', timeout: 30000 });
     }
 
     async isNewPatientHeaderVisible(): Promise<boolean> {
@@ -189,4 +190,4 @@ export class RegisterPatientPage extends BasePage {
         return await this.realtionshipsHeader.isVisible();
     }
 
-}    
+}

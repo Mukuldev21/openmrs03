@@ -1,4 +1,4 @@
-import {Page, Locator} from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class HomePage extends BasePage {
@@ -9,11 +9,10 @@ export class HomePage extends BasePage {
     readonly userMenuChangeLanguage: Locator;
     readonly userMenuChangePassword: Locator;
     readonly userMenuLogout: Locator;
-    readonly resgisterPatientButton: Locator;   
+    readonly resgisterPatientButton: Locator;
 
-    // Service Queues navigation and page locators (updated to match provided DOM)
+    // Service Queues navigation and page locators
     readonly serviceQueuesNav: Locator;
-    //readonly serviceQueuesHeader: Locator;
     readonly addPatientButton: Locator;
     readonly filterDropdownLabel: Locator;
     readonly filterTableLabel: Locator;
@@ -46,15 +45,15 @@ export class HomePage extends BasePage {
         this.userMenuChangeLanguage = page.locator('a[aria-label="Change language"]');
         this.userMenuChangePassword = page.locator('a[aria-label="Change password"]');
         this.userMenuLogout = page.locator('button:has-text("Logout")');
-        this.resgisterPatientButton = page.getByRole('button', { name: 'Add patient' });
+
+        // Updated locator for Add Patient button - using the one verified in browser tool
+        this.resgisterPatientButton = page.locator('button[aria-label="Add patient"]').first();
 
         // Service Queues navigation locator
         this.serviceQueuesNav = page.locator('p:has-text("Service queues")');
-        // Service Queues page locators (all selectors match provided DOM)
-        // Section containing the Patients currently in queue header (simple getByText)
+
+        // Service Queues page locators
         this.serviceQueuesSection = page.getByText('Patients currently in queue', { exact: true });
-        //this.serviceQueuesHeader = page.locator('div.-esm-service-queues__queue-table__headerContainer___DDkBX div.-esm-service-queues__queue-table__tabletHeading___53e1q > h4');
-           
         this.addPatientButton = page.locator('button[aria-label="Search Patient Button"].cds--btn.cds--btn--sm.cds--layout--size-sm.cds--btn--secondary', { hasText: 'Add patient to queue' });
         this.filterDropdownLabel = page.locator('label.cds--label', { hasText: 'Show patients with status:' });
         this.filterTableLabel = page.locator('label.cds--label', { hasText: 'Filter table' });
@@ -64,11 +63,6 @@ export class HomePage extends BasePage {
         this.myAccountMenu = page.getByRole('button', { name: 'My Account' });
         this.changeLanguageOption = page.getByLabel('Change language').getByRole('button', { name: 'Change' });
         this.englishLanguageOption = page.getByRole('button', { name: 'English' });
-        
-
-
-    
-
     }
 
     async waitForHomePageLoad(): Promise<void> {
@@ -80,9 +74,7 @@ export class HomePage extends BasePage {
     }
 
     async waitForServiceQueuesPageLoaded(): Promise<void> {
-        // Wait for the main section and header to be visible
         await this.serviceQueuesSection.waitFor({ state: 'visible', timeout: 15000 });
-        //await this.serviceQueuesHeader.waitFor({ state: 'visible', timeout: 15000 });
     }
 
     async clickUserButton(): Promise<void> {
