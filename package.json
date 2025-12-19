@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test --project=\"OpenMRS E2E Test\" --workers=1",
-    "test:module": "playwright test --project=\"OpenMRS E2E Test\" --workers=1 --grep",
-    "test:headed": "playwright test --project=\"OpenMRS E2E Test\" --workers=1 --headed",
+    "test": "playwright test --project=\"OpenMRS E2E Test\"",
+    "test:sequential": "playwright test --project=\"OpenMRS E2E Test\" --workers=1",
+    "test:headed": "playwright test --project=\"OpenMRS E2E Test\" --headed",
     "test:debug": "playwright test --project=\"OpenMRS E2E Test\" --workers=1 --debug",
     "test:report": "playwright show-report",
     "test:ui": "playwright test --project=\"OpenMRS E2E Test\" --ui"
