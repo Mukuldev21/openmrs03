@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test --project=\"OpenMRS E2E Test\" --workers=1",
+    "test:module": "playwright test --project=\"OpenMRS E2E Test\" --workers=1 --grep",
+    "test:headed": "playwright test --project=\"OpenMRS E2E Test\" --workers=1 --headed",
+    "test:debug": "playwright test --project=\"OpenMRS E2E Test\" --workers=1 --debug",
+    "test:report": "playwright show-report",
+    "test:ui": "playwright test --project=\"OpenMRS E2E Test\" --ui"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
