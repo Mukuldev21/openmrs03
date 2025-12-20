@@ -33,6 +33,10 @@ test.describe('Module 1: Authentication', () => {
       await loginPage.clickElement(loginPage.loginButton);
     });
 
+    await test.step('Handle potential location selection', async () => {
+      await loginPage.handleLocationSelection();
+    });
+
     await test.step('Verify user is redirected to Service Queues page', async () => {
       // Wait for navigation to complete - using 'load' is faster than 'networkidle'
       await page.waitForLoadState('load', { timeout: 30000 });
@@ -273,6 +277,10 @@ test.describe('Module 1: Authentication', () => {
       await loginPage.clickElement(loginPage.loginButton);
     });
 
+    await test.step('Handle potential location selection', async () => {
+      await loginPage.handleLocationSelection();
+    });
+
     await test.step('Verify login succeeds (username is NOT case-sensitive)', async () => {
       // OpenMRS login is NOT case-sensitive
       await page.waitForLoadState('load', { timeout: 30000 });
@@ -296,6 +304,7 @@ test.describe('Module 1: Authentication', () => {
       await loginPage.waitForElement(loginPage.passwordInput);
       await loginPage.fillInput(loginPage.passwordInput, LoginDetails.validUser.password);
       await loginPage.clickElement(loginPage.loginButton);
+      await loginPage.handleLocationSelection();
 
       // Wait for navigation after login - networkidle needed for logout test
       await page.waitForLoadState('networkidle', { timeout: 30000 });
@@ -339,6 +348,7 @@ test.describe('Module 1: Authentication', () => {
       await loginPage.waitForElement(loginPage.passwordInput);
       await loginPage.fillInput(loginPage.passwordInput, LoginDetails.validUser.password);
       await loginPage.clickElement(loginPage.loginButton);
+      await loginPage.handleLocationSelection();
 
       await page.waitForLoadState('load', { timeout: 30000 });
       await page.waitForTimeout(5000);
@@ -407,6 +417,7 @@ test.describe('Module 1: Authentication', () => {
       await loginPage.waitForElement(loginPage.passwordInput);
       await loginPage.fillInput(loginPage.passwordInput, LoginDetails.validUser.password);
       await loginPage.clickElement(loginPage.loginButton);
+      await loginPage.handleLocationSelection();
 
       await page.waitForLoadState('networkidle', { timeout: 30000 });
       await page.waitForTimeout(5000);
