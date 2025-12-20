@@ -123,6 +123,7 @@ test('login', async ({ loginPage }) => {
 * **Setup:** Use `dotenv` package to load environment variables from `.env` file.
 * **Location:** Create `.env` file in project root (add to `.gitignore`).
 * **Access:** Use `process.env.VARIABLE_NAME` in your code.
+* **Naming:** **NEVER** use generic names like `USERNAME` or `PASSWORD` as they conflict with system environment variables. Always prefix them, e.g., `O3_USERNAME` and `O3_PASSWORD` (or `ProjectName_USERNAME`).
 
 **Installation:**
 ```bash
@@ -136,8 +137,9 @@ BASE_URL=https://your-app.com
 API_BASE_URL=https://api.your-app.com
 
 # Authentication
-USERNAME=your_username
-PASSWORD=your_password
+# NOTE: Use prefixed names to avoid system conflicts
+O3_USERNAME=your_username
+O3_PASSWORD=your_password
 API_KEY=your_api_key_here
 
 # Environment
@@ -152,8 +154,8 @@ BASE_URL=
 API_BASE_URL=
 
 # Authentication
-USERNAME=
-PASSWORD=
+O3_USERNAME=
+O3_PASSWORD=
 API_KEY=
 
 # Environment
