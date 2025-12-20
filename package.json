@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test --project=\"OpenMRS E2E Test\"",
+    "test": "node scripts/run_tests.js",
     "test:sequential": "playwright test --project=\"OpenMRS E2E Test\" --workers=1",
     "test:headed": "playwright test --project=\"OpenMRS E2E Test\" --headed",
     "test:debug": "playwright test --project=\"OpenMRS E2E Test\" --workers=1 --debug",
