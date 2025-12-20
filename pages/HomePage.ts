@@ -18,6 +18,7 @@ export class HomePage extends BasePage {
     readonly filterTableLabel: Locator;
     readonly clearQueueButton: Locator;
     readonly serviceQueuesSection: Locator;
+    readonly appointmentsNav: Locator;
     readonly tableHeaders: string[] = [
         'Name',
         'Coming from',
@@ -58,6 +59,7 @@ export class HomePage extends BasePage {
         this.filterDropdownLabel = page.locator('label.cds--label', { hasText: 'Show patients with status:' });
         this.filterTableLabel = page.locator('label.cds--label', { hasText: 'Filter table' });
         this.clearQueueButton = page.locator('button.cds--btn.cds--btn--lg.cds--layout--size-lg.cds--btn--ghost', { hasText: 'Clear queue' });
+        this.appointmentsNav = page.locator('p:has-text("Appointments")');
 
         // Language change menu
         this.myAccountMenu = page.getByRole('button', { name: 'My Account' });
@@ -115,5 +117,14 @@ export class HomePage extends BasePage {
 
     async clickMyAccountMenu(): Promise<void> {
         await this.myAccountMenu.click();
+    }
+
+    async clickAppointmentsNav(): Promise<void> {
+        await this.appointmentsNav.click();
+    }
+
+    async isAppointmentsPageVisible(): Promise<boolean> {
+        // Checking for a specific element unique to Appointments page or just url
+        return await this.page.url().includes('appointments');
     }
 }
