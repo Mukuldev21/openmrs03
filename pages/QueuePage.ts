@@ -16,8 +16,13 @@ export class QueuePage extends BasePage {
 
     constructor(page: Page) {
         super(page);
-        this.queuesTableRows = page.locator('table.cds--data-table > tbody > tr');
-        this.noQueuesMessage = page.locator('p.-esm-service-queues__queue-table__content___hD-u1', { hasText: 'No patients to display' });
+        // Using role='table' is Preferred Priority 1 (Semantics)
+        this.queuesTableRows = page.getByRole('table').locator('tbody tr');
+
+        // Robust locator for empty state using class and text, but refined to avoid pure CSS class if possible
+        // Standard: Container + Text
+        // Since we don't have a stable parent role easily viewable without DOM, using text Exact match or filtered.
+        this.noQueuesMessage = page.getByText('No patients to display');
     }
 
     /**

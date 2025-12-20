@@ -33,19 +33,29 @@ export class RegisterPatientPage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.page = page;
-        this.givenNameInput = page.locator('input[name="givenName"]');
-        this.middleNameInput = page.locator('input[name="middleName"]');
-        this.familyNameInput = page.locator('input[name="familyName"]');
-        //this.dateOfBirthInput = page.locator('input[name="birthdate"]');
-        this.dateOfBirthInput = page.locator('input[type="date"][name="birthdate"]');
-        this.phoneNumberInput = page.locator('input[name="telephoneNumber"]');
-        this.emailInput = page.locator('input[name="email"]');
-        this.addressInput = page.locator('input[name="address1"]');
-        this.registerButton = page.locator('button:has-text("Register Patient")');
-        this.cancelButton = page.locator('button:has-text("Cancel")');
-        this.clearFormButton = page.locator('button:has-text("Clear Form")');
-        this.unknownPatientCheckbox = page.locator('input[type="checkbox"][name="unknown"]');
-        this.advancedSearchLink = page.locator('a:has-text("Advanced Search")');
+        this.page = page;
+        // Priority 1: Semantics (Accessible Names/Labels)
+        this.givenNameInput = page.getByRole('textbox', { name: 'Given Name' });
+        this.middleNameInput = page.getByRole('textbox', { name: 'Middle Name' });
+        this.familyNameInput = page.getByRole('textbox', { name: 'Family Name' });
+
+        // Date picker might be complex. Using Label if possible, or fallback to reliable attribute if strictly standard
+        // "Date of Birth" or "Birthdate". Trying Role first.
+        this.dateOfBirthInput = page.getByLabel('Date of Birth');
+
+        this.phoneNumberInput = page.getByRole('textbox', { name: 'Telephone Number' });
+        this.emailInput = page.getByRole('textbox', { name: 'Email' }); // Check exact label? likely "Email"
+        this.addressInput = page.getByRole('textbox', { name: 'Address' }); // Address 1?
+
+        // Buttons
+        this.registerButton = page.getByRole('button', { name: 'Register Patient' });
+        this.cancelButton = page.getByRole('button', { name: 'Cancel' });
+        this.clearFormButton = page.getByRole('button', { name: 'Clear Form' });
+
+        // Checkbox
+        this.unknownPatientCheckbox = page.getByRole('checkbox', { name: 'Unknown patient' }); // Guessing label from variable name
+
+        this.advancedSearchLink = page.getByRole('link', { name: 'Advanced Search' });
         this.sex = page.getByRole('heading', { name: 'Sex' });
         this.maleGenderButton = page.getByRole('radio', { name: 'Male', exact: true });
         this.femaleGenderButton = page.getByRole('radio', { name: 'Female', exact: true });
